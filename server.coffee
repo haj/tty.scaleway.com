@@ -36,7 +36,7 @@ getShellArgs = (session) ->
       argv: process.argv
       env: process.env
 
-  return process.argv[3..] if process.argv.length > 3
+  return process.argv[4..] if process.argv.length > 4
   if session.req.query?.type?
     query = session.req.query
   else if session.req.headers?.referer?
@@ -59,7 +59,7 @@ getShellArgs = (session) ->
 
 config =
   port: 8080
-  hostname: "0.0.0.0"
+  hostname: process.argv[3] || "0.0.0.0"
   shell: process.argv[2] || "nolp-cli"
   shellArgs: getShellArgs
   static: "./static"
